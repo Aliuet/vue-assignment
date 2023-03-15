@@ -1,6 +1,110 @@
 
 <template>
   <div class="container">
+    <div class="main-body">
+      <div class="row">
+        <div class="title">
+          <h4 class="align-items-center">Please enter the founder's unique ID to get started.</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <hr>
+          <label for="founder-id-input">Founder ID:<span class="text-danger"> * </span></label>
+          <input
+            id="founder-id-input"
+            type="text"
+            class="form-control mt-2"
+            v-model="founderId"
+            placeholder="Enter founder id"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-md-6 mx-auto">
+          <br/>
+          <h5 v-if="founder">
+            You entered the founder ID <strong> '{{ founderId }}'</strong><br>this seems like a good place to show their data
+          </h5>
+        </div>
+      </div>
+      <div class="row gutters-sm">
+        <div class="col-md-4 mb-3" v-if="avatarUrl">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img  class="rounded-circle " width="150" :src="avatarUrl" alt="Founder avatar" />
+                <div class="mt-3">
+                  <h4>{{ founder.name.first }} {{  founder.name.last }}</h4>
+                  <p class="text-secondary mb-1">{{company.name}}</p>
+                  <p class="text-muted font-size-sm">{{ company.website }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8" v-if="founder">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Full Name</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{ founder.name.first }} {{ founder.name.last }}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Email</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{ founder.email }}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Phone</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{ founder.phone }}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Gender</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{ founder.gender }}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Country</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{ founder.location.country }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">City</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{ founder.location.city }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="container ">
     <div class="row">
       <div class="title">
         <h4 class="align-items-center">Please enter the founder's unique ID to get started.</h4>
@@ -29,7 +133,23 @@
         </h5>
       </div>
     </div>
-
+    <div v-if="avatarUrl">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <hr>
+          <u>
+            <h4 class="d-flex align-items-center justify-content-between mb-3 mt-2">
+                  Avatar Image:
+            </h4>
+          </u>
+          <div class="card card-default">
+            <div class="card-body bg-info">
+                <img  class="img-fluid w-50px h-50px border p-1 rounded-circle" :src="avatarUrl" alt="Founder avatar" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row" >
       <div class="col-md-6 mx-auto">
         <hr>
@@ -72,30 +192,14 @@
         </div>
       </div>
     </div>
-    <div v-if="avatarUrl">
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <hr>
-          <u>
-            <h4 class="d-flex align-items-center justify-content-between mb-3 mt-2">
-                  Avatar Image:
-            </h4>
-          </u>
-          <div class="card card-default">
-            <div class="card-body bg-info">
-                <img  class="img-fluid w-50px h-50px border p-1 rounded-circle" :src="avatarUrl" alt="Founder avatar" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <div v-if="company">
       <div class="row">
         <div class="col-md-6 mx-auto">
           <hr>
           <u>
             <h4 class="d-flex align-items-center justify-content-between mb-3 mt-3">
-                 Company Name:
+                 Company:
             </h4>
           </u>
         </div>
@@ -111,7 +215,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
