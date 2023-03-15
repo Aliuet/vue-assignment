@@ -1,32 +1,117 @@
 
 <template>
-  <div class="input-wrapper">
-    <p>Please enter the founder's unique ID to get started.</p>
-    <label for="founder-id-input">
-      Founder ID:
-      <input id="founder-id-input" type="text" v-model="founderId" placeholder="Any characters will do..." />
-    </label>
-    <p v-if="founder">
-      You entered the founder ID '{{ founderId }}'… this seems like a good place to show their data…
-      <br />
-      Founder's name: {{ founder.name.first }} {{ founder.name.last }}
-    </p>
-    <div v-if="avatarUrl">
-      <img :src="avatarUrl" alt="Founder avatar" />
+  <div class="container">
+    <div class="row">
+      <div class="title">
+        <h4 class="align-items-center">Please enter the founder's unique ID to get started.</h4>
+
+      </div>
+
     </div>
-    <p v-if="company">
-      The founder founded the company "{{ company.name }}" in {{ company.year }}.
-    </p>
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <hr>
+        <label for="founder-id-input">Founder ID:<span class="text-danger"> * </span></label>
+        <input
+          id="founder-id-input"
+          type="text"
+          class="form-control mt-2"
+          v-model="founderId"
+          placeholder="Enter founder id"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-md-6 mx-auto">
+        <br/>
+        <h5 v-if="founder">
+          You entered the founder ID <strong> '{{ founderId }}'</strong><br>this seems like a good place to show their data
+        </h5>
+      </div>
+    </div>
+
+    <div class="row" >
+      <div class="col-md-6 mx-auto">
+        <hr>
+        <u>
+          <h4 class="d-flex align-items-center justify-content-between mt-2">
+                Founder Details:
+          </h4>
+        </u>
+      </div>
+    </div>
+    <div v-if="founder">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="table-responsive">
+            <table  class="table table-bordered mt-3">
+              <thead class="bg-success text-white">
+                <tr>
+                  <th class="px-1 text-center white-space-nowrap">Name</th>
+                  <th class="px-1 text-center white-space-nowrap">Last Name</th>
+                  <th class="px-1 text-center white-space-nowrap">Gender</th>
+                  <th class="px-1 text-center white-space-nowrap">Email</th>
+                  <th class="px-1 text-center white-space-nowrap">City</th>
+                  <th class="px-1 text-center white-space-nowrap">Country</th>
+                  <th class="px-1 text-center white-space-nowrap">Phone</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="px-1 text-center white-space-nowrap">{{ founder.name.first }} {{ founder.name.last }}</td>
+                  <td class="px-1 text-center white-space-nowrap">{{ founder.name.last }}</td>
+                  <td class="px-1 text-center white-space-nowrap">{{ founder.gender }}</td>
+                  <td class="px-1 text-center white-space-nowrap">{{ founder.email }}</td>
+                  <td class="px-1 text-center white-space-nowrap">{{ founder.location.city }}</td>
+                  <td class="px-1 text-center white-space-nowrap">{{ founder.location.country }}</td>
+                  <td class="px-1 text-center white-space-nowrap">{{ founder.phone }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-if="avatarUrl">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <hr>
+          <u>
+            <h4 class="d-flex align-items-center justify-content-between mb-3 mt-2">
+                  Avatar Image:
+            </h4>
+          </u>
+          <div class="card card-default">
+            <div class="card-body bg-info">
+                <img  class="img-fluid w-50px h-50px border p-1 rounded-circle" :src="avatarUrl" alt="Founder avatar" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-if="company">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <hr>
+          <u>
+            <h4 class="d-flex align-items-center justify-content-between mb-3 mt-3">
+                 Company Name:
+            </h4>
+          </u>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <p class="mt-2"> The founder founded the company:</p>
+          <h6>
+            <strong>Name: </strong>"{{ company.name }}" <br/>
+            <strong>website: </strong>  {{ company.website }}.
+          </h6>
+          <hr>
+        </div>
+      </div>
+    </div>
   </div>
-    <!-- <br>
-    <br>
-    <button class="my-button" @click="demographicData">Random user Data</button>
-    <br>
-    <br>
-    <button class="my-button" @click="avatorData">Avator Data</button>
-    <br>
-    <br>
-    <button class="my-button" @click="companyData">Compan Founder Name</button> -->
 </template>
 
 <script>
@@ -78,74 +163,8 @@ export default {
         console.error(error);
       }
     },
-    //for usiing other apis
-    // demographicData() {
-    //   axios.get('https://randomuser.me/api/')
-    //     .then(response => {
-    //       console.log(response.data);
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-    // },
 
-    // avatorData() {
-    //   axios.get('https://robohash.org/')
-    //     .then(response => {
-    //       console.log(response.data);
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-    // },
-    // companyData() {
-    //   axios.get('https://fakerapi.it/')
-    //     .then(response => {
-    //       console.log(response.data);
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-    // }
   }
 };
 
-
 </script>
-<style scoped>
-.my-button {
-    background-color: rgb(32, 192, 109);
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 5px;
-    padding-right: 4px;
-  }
-  .input-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1em 0;
-}
-
-input {
-  padding: 0.5em;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 1em;
-  width: 100%;
-  max-width: 20em;
-}
-
-input:focus {
-  outline: none;
-  border-color: #0077ff;
-  box-shadow: 0 0 0 2px #0077ff33;
-}
-</style>

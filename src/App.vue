@@ -1,6 +1,6 @@
 <template>
-  <img alt="Vue logo" src="./assets/briefcase.svg" />
-  <h1>Information about company founders</h1>
+  <img alt="Vue logo" src="./assets/briefcase.svg"/>
+  <h3 class="mt-2">Information about company founders</h3>
   <CompanyFounder />
 </template>
 
